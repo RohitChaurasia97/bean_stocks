@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <!--
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Movie App</title>
+    <meta name="description" content="" />
+  </head>
+  -->
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <title>Movie App</title>
+  
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+  </head>
+
+  <div id="myDIV" class="header">
+    <h2>My Movie List</h2>
+    <input type="text" id="myInput" placeholder="Title..." />
+    <span onclick="addMovie()" class="addBtn">Add New Movie</span>
+  </div>
+
+  <body>
+    <ul id="myUL">
+      <p></p>
+      <strong>Movies:</strong>
+      <p></p>
+      {{range .stocks}} 
+      <li id="{{.ID}}" class="list">
+        {{.Title}}
+        <span>
+          <button onclick="completeHandler({{.ID}}, {{.Title}}) ">
+            <strong>Complete</strong>
+          </button>
+          <button onclick="deleteHandler({{.ID}}) ">
+            <strong>Delete</strong>
+          </button>
+        </span>
+      </li>
+      {{end}} 
+    </ul>
+    <p></p>
+    <strong>Completed Movies:</strong>
+    <p></p>
+    <ul id="myULCompleted">
+      {{range .stocks}} 
+      <li class="checked">{{.Title}}</li>
+      {{end}} 
+    </ul>
+
+    {{template "moviejs" .}}
+  </body>
+
+  {{template "moviecss" .}}
+</html>

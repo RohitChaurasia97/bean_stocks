@@ -10,6 +10,7 @@ require (
 	github.com/retail-ai-inc/bean v1.1.9
 	github.com/spf13/cobra v1.3.0
 	github.com/spf13/viper v1.10.1
+	github.com/yudai/pp v2.0.1+incompatible
 )
 
 require (
@@ -39,6 +40,7 @@ require (
 	github.com/jackc/pgx/v4 v4.15.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.4 // indirect
+	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/labstack/echo-contrib v0.11.0 // indirect
 	github.com/labstack/gommon v0.3.1 // indirect
