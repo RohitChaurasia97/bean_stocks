@@ -33,22 +33,21 @@ import (
 )
 
 type Repositories struct {
-	exampleRepo   repositories.ExampleRepository
+	exampleRepo                repositories.ExampleRepository
 	stockstimelineddetailsRepo repositories.StockstimelineddetailsRepository // added by bean
-	stockdetailsRepo repositories.StockdetailsRepository // added by bean
-	stockinfoRepo repositories.StockinfoRepository // added by bean
+	stockinfoRepo              repositories.StockinfoRepository              // added by bean
 }
 
 type Services struct {
-	exampleSvc   services.ExampleService
+	exampleSvc                services.ExampleService
 	stockstimelineddetailsSvc services.StockstimelineddetailsService // added by bean
-	stockdetailsSvc services.StockdetailsService // added by bean
-	stockinfoSvc services.StockinfoService // added by bean
+	stockinfoSvc              services.StockinfoService              // added by bean
 }
 
 type Handlers struct {
-	exampleHdlr   handlers.ExampleHandler
-	stockinfoHdlr handlers.StockinfoHandler // added by bean
+	exampleHdlr                handlers.ExampleHandler
+	stockstimelineddetailsHdlr handlers.StockstimelineddetailsHandler // added by bean
+	stockinfoHdlr              handlers.StockinfoHandler              // added by bean
 }
 
 func Init(b *bean.Bean) {
@@ -56,22 +55,21 @@ func Init(b *bean.Bean) {
 	e := b.Echo
 
 	repos := &Repositories{
-		exampleRepo:   repositories.NewExampleRepository(b.DBConn),
+		exampleRepo:                repositories.NewExampleRepository(b.DBConn),
 		stockstimelineddetailsRepo: repositories.NewStockstimelineddetailsRepository(b.DBConn), // added by bean
-		stockdetailsRepo: repositories.NewStockdetailsRepository(b.DBConn), // added by bean
-		stockinfoRepo: repositories.NewStockinfoRepository(b.DBConn), // added by bean
+		stockinfoRepo:              repositories.NewStockinfoRepository(b.DBConn),              // added by bean
 	}
 
 	svcs := &Services{
-		exampleSvc:   services.NewExampleService(repos.exampleRepo),
+		exampleSvc:                services.NewExampleService(repos.exampleRepo),
 		stockstimelineddetailsSvc: services.NewStockstimelineddetailsService(repos.stockstimelineddetailsRepo), // added by bean
-		stockdetailsSvc: services.NewStockdetailsService(repos.stockdetailsRepo), // added by bean
-		stockinfoSvc: services.NewStockinfoService(repos.stockinfoRepo), // added by bean
+		stockinfoSvc:              services.NewStockinfoService(repos.stockinfoRepo),                           // added by bean
 	}
 
 	hdlrs := &Handlers{
-		exampleHdlr:   handlers.NewExampleHandler(svcs.exampleSvc),
-		stockinfoHdlr: handlers.NewStockinfoHandler(svcs.stockinfoSvc), // added by bean
+		exampleHdlr:                handlers.NewExampleHandler(svcs.exampleSvc),
+		stockstimelineddetailsHdlr: handlers.NewStockstimelineddetailsHandler(svcs.stockstimelineddetailsSvc), // added by bean
+		stockinfoHdlr:              handlers.NewStockinfoHandler(svcs.stockinfoSvc),                           // added by bean
 	}
 
 	// Default index page goes to above JSON (/json) index page.
@@ -92,5 +90,7 @@ func Init(b *bean.Bean) {
 
 	e.POST("/addstock", hdlrs.stockinfoHdlr.AddStockInfo)
 	e.GET("/stocks", hdlrs.stockinfoHdlr.GetAllStockInfos)
+	e.GET("/renderdata/:symbol", hdlrs.stockstimelineddetailsHdlr.RenderData)
+	e.GET("/renderstock/:symbol", hdlrs.stockstimelineddetailsHdlr.RenderStock)
 
 }

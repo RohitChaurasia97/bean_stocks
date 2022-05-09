@@ -3,9 +3,11 @@ module bean_stocks
 go 1.17
 
 require (
+	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/getsentry/sentry-go v0.13.0
 	github.com/go-playground/validator/v10 v10.9.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/iancoleman/orderedmap v0.2.0
 	github.com/labstack/echo/v4 v4.6.3
 	github.com/retail-ai-inc/bean v1.1.9
 	github.com/spf13/cobra v1.3.0

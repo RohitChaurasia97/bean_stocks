@@ -6,13 +6,10 @@ import (
 	// "github.com/retail-ai-inc/bean/trace"
 	"bean_stocks/models"
 	"bean_stocks/repositories"
-
-	"github.com/yudai/pp"
 )
 
 type StockinfoService interface {
-	StockinfoServiceExampleFunc(ctx context.Context) (string, error)
-	AddStockinfoService(ctx context.Context, stockInfo models.StockInfo) ([]models.StockInfo, error)
+	AddStockinfoService(ctx context.Context, stockInfo models.StockInfo) (string, error)
 	GetAllStockinfoService(ctx context.Context) ([]models.StockInfo, error)
 }
 
@@ -26,15 +23,7 @@ func NewStockinfoService(stockinfoRepo repositories.StockinfoRepository) *stocki
 	}
 }
 
-func (service *stockinfoService) StockinfoServiceExampleFunc(ctx context.Context) (string, error) {
-	// IMPORTANT: If you wanna trace the performance of your handler function then uncomment following 3 lines
-	// finish := trace.Start(ctx, "http.service")
-	// defer finish()
-	return "StockinfoService", nil
-}
-
-func (service *stockinfoService) AddStockinfoService(ctx context.Context, stockInfo models.StockInfo) ([]models.StockInfo, error) {
-	pp.Println("AddStockinfoService triigered")
+func (service *stockinfoService) AddStockinfoService(ctx context.Context, stockInfo models.StockInfo) (string, error) {
 	return service.stockinfoRepository.AddStockInfoRepo(ctx, stockInfo)
 }
 
